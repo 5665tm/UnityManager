@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -150,6 +151,116 @@ namespace UnityManager
 				string pair = _folderExtras + file.Replace(_folderMain, "");
 				File.Copy(pair, file, true);
 			}
+		}
+
+		private void BtStartCopypaster_Click(object sender, RoutedEventArgs e)
+		{
+			int coun = 0;
+			string info = TbGitInfo.Text;
+			foreach (var l in info.Replace("\r", "").Split('\n'))
+			{
+				if (!l.Contains(": Assets"))
+				{
+					continue;
+				}
+
+				var line = l.Replace("/", "\\");
+
+				var splited = line.Split(new[] {": "}, StringSplitOptions.RemoveEmptyEntries);
+
+				string path = splited[1];
+				var from = Path.Combine(LbFolderExtrasCop.Content.ToString(), path);
+				var to = Path.Combine(LbFolderMainCop.Content.ToString(), path);
+
+				var state = splited[0].ToLowerInvariant();
+				if (state == "deleted")
+				{
+					if (File.Exists(to))
+					{
+						AddLogCopy("Deleted             " + to);
+						File.Delete(to);
+					}
+					else
+					{
+						AddLogCopy("Notfinded for del   " + to);
+					}
+				}
+				else if (state == "rename")
+				{
+					var splited2 = path.Split(new[] {" (from "}, StringSplitOptions.RemoveEmptyEntries);
+					string newPath = splited2[0];
+					var raw = splited2[1];
+					string oldPath = raw.Substring(0, raw.Length - 1);
+
+					var oldFile = Path.Combine(LbFolderMainCop.Content.ToString(), oldPath);
+					if (File.Exists(oldFile))
+					{
+						AddLogCopy("Deleted ren         " + oldFile);
+						File.Delete(oldFile);
+					}
+					else
+					{
+						AddLogCopy("Notfinded for delren" + oldFile);
+					}
+
+					
+					from = Path.Combine(LbFolderExtrasCop.Content.ToString(), newPath);
+					to = Path.Combine(LbFolderMainCop.Content.ToString(), newPath);
+
+					if (!File.Exists(from))
+					{
+						AddLogCopy("SHALOOOOOOOOOOOOOOOOOOOOOOOOOOOOM! ! ! 11111 WARNINGQ! ! ! ! ");
+					}
+					else
+					{
+						if (File.Exists(to))
+						{
+							File.Delete(to);
+						}
+						var toDir = Path.GetDirectoryName(to);
+						if (!Directory.Exists(toDir))
+						{
+							Directory.CreateDirectory(toDir);
+						}
+						File.Copy(from, to);
+					}
+				}
+				else
+				{
+					if (!File.Exists(from))
+					{
+						AddLogCopy("SHALOOOOOOOOOOOOOOOOOOOOOOOOOOOOM! ! ! 11111 WARNINGQ! ! ! ! ");
+					}
+					else
+					{
+						if (File.Exists(to))
+						{
+							File.Delete(to);
+						}
+						var toDir = Path.GetDirectoryName(to);
+						if (!Directory.Exists(toDir))
+						{
+							Directory.CreateDirectory(toDir);
+						}
+						File.Copy(from, to);
+					}
+				}
+			}
+		}
+
+		private void AddLogCopy(string log)
+		{
+			TbCopyLog.Text += "\n" + DateTime.Now.ToLongTimeString() + " " + log;
+		}
+
+		private void BtFolderMainCop_Click(object sender, RoutedEventArgs e)
+		{
+			SelectFolder(LbFolderMainCop);
+		}
+
+		private void BtFolderExtrasCop_Click(object sender, RoutedEventArgs e)
+		{
+			SelectFolder(LbFolderExtrasCop);
 		}
 	}
 }

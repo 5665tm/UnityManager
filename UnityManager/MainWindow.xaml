@@ -1,15 +1,41 @@
 ﻿<Window x:Class="UnityManager.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
-	<Grid Height="571" VerticalAlignment="Bottom">
-		<Button x:Name="BtFolderMain" Content="FolderMain" Click="BtFolderMain_Click" Margin="0,14,919,0" Height="20" VerticalAlignment="Top"/>
-		<Button x:Name="BtFolderExtras" Content="FolderExtras" Margin="0,34,919,0" VerticalAlignment="Top" Click="BtFolderExtras_Click"/>
-		<Label x:Name="LbFolderMain" Content="Label" HorizontalAlignment="Left" Margin="75,14,0,0" VerticalAlignment="Top" Height="20" Width="357" FontSize="9"/>
-		<Label x:Name="LbFolderExtras" Content="Label" HorizontalAlignment="Left" Margin="75,34,0,0" VerticalAlignment="Top" Height="20" Width="357" FontSize="9"/>
-		<Button x:Name="BtStat" Content="Статистика по метафайлам" HorizontalAlignment="Left" Margin="432,14,0,537" Width="167" Click="BtStat_Click"/>
-		<ListBox x:Name="ListBoxFiles" Height="502" VerticalAlignment="Top" Margin="0,59,0,0"/>
-		<Button x:Name="BtReplace" Content="Extras to main metafiles" HorizontalAlignment="Left" Margin="432,34,0,0" VerticalAlignment="Top" Width="167" Click="BtReplace_Click"/>
-
-	</Grid>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
+	<TabControl>
+		<TabItem Header="Meta helper">
+			<Grid Height="571" VerticalAlignment="Bottom">
+				<Button x:Name="BtFolderMain" Content="FolderMain" Click="BtFolderMain_Click" Margin="1,48,807,0" Height="20"
+						VerticalAlignment="Top" />
+				<Button x:Name="BtFolderExtras" Content="FolderExtras" Margin="1,68,807,0" VerticalAlignment="Top"
+						Click="BtFolderExtras_Click" />
+				<Label x:Name="LbFolderMain" Content="Label" HorizontalAlignment="Left" Margin="182,48,0,0" VerticalAlignment="Top"
+						Height="20" Width="251" FontSize="9" />
+				<Label x:Name="LbFolderExtras" Content="Label" HorizontalAlignment="Left" Margin="182,68,0,0"
+						VerticalAlignment="Top"
+						Height="20" Width="251" FontSize="9" />
+				<Button x:Name="BtStat" Content="Статистика по метафайлам" HorizontalAlignment="Left" Margin="433,48,0,503"
+						Width="167" Click="BtStat_Click" />
+				<ListBox x:Name="ListBoxFiles" Height="441" VerticalAlignment="Top" Margin="0,120,0,0" />
+				<Button x:Name="BtReplace" Content="Extras to main metafiles" HorizontalAlignment="Left" Margin="433,68,0,0"
+						VerticalAlignment="Top" Width="167" Click="BtReplace_Click" />
+			</Grid>
+		</TabItem>
+		<TabItem Header="Copypaster git">
+			<Grid>
+				<Button x:Name="BtFolderMainCop" Content="FolderMain" Click="BtFolderMainCop_Click" Margin="0,10,808,0" Height="20"
+						VerticalAlignment="Top" />
+				<Button x:Name="BtFolderExtrasCop" Content="FolderExtras" Margin="0,30,808,0" VerticalAlignment="Top"
+						Click="BtFolderExtrasCop_Click" />
+				<Label x:Name="LbFolderMainCop" Content="Label" HorizontalAlignment="Left" Margin="181,10,0,0" VerticalAlignment="Top"
+						Height="20" Width="251" FontSize="9" />
+				<Label x:Name="LbFolderExtrasCop" Content="Label" HorizontalAlignment="Left" Margin="181,30,0,0"
+						VerticalAlignment="Top"
+						Height="20" Width="251" FontSize="9" />
+				<Button x:Name="BtStartCopypaster" Content="GOOOOO" HorizontalAlignment="Left" Margin="437,10,0,0" VerticalAlignment="Top" Width="267" Height="40" Click="BtStartCopypaster_Click"/>
+				<TextBox x:Name="TbGitInfo" HorizontalAlignment="Left" Height="348" Margin="10,58,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="959" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+				<TextBox x:Name="TbCopyLog" HorizontalAlignment="Left" Height="114" Margin="10,411,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="959" VerticalScrollBarVisibility="Auto"/>
+			</Grid>
+		</TabItem>
+	</TabControl>
 </Window>
